@@ -16,7 +16,4 @@
       @apply bg-gray-900 text-green-500;
     }
   }
-  .btna {
-    @apply p-2 border rounded border-green-500 hover:text-gray-900 hover:bg-green-500 transition-colors duration-300;
-  }
 </style>
