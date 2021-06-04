@@ -27,7 +27,16 @@ class Tradfri extends TradfriClient {
       tradfri.lightbulbs = {};
       tradfri._groups = {};
 
-      await tradfri.connect(process.env.IDENTITY, process.env.PSK);
+      if (!process.env.IDENTITY || !process.env.PSK) {
+        console.log('Couldn\'t find an identity/psk pair. Generating a new one.');
+        const { identity, psk } = await tradfri.authenticate(process.env.SECURITY_CODE);
+        console.log(`Created identity/psk pair.\nIdentity: ${identity}\nPSK: ${psk}\nIt's recommended that you store these somewhere safe.\n`);
+        await tradfri.connect(identity, psk);
+      }
+      else {
+        await tradfri.connect(process.env.IDENTITY, process.env.PSK);
+      }
+
       console.log('Connected to hub');
 
       // Setup devices update functions
