@@ -30,13 +30,13 @@
     await operateLight({ brightness: value });
   };
 
-  const changeColor = async({detail: { color } }): Promise<void> => {
+  const changeColor = async ({ detail: { color } }): Promise<void> => {
     if (color === light.color) return;
-    await operateLight({color: color})
-  }
+    await operateLight({ color: color });
+  };
 </script>
 
-<div class="flex flex-col my-1">
+<div class="flex flex-col my-4 first:mt-0 last:mb-0">
   <div class="flex justify-between mb-3">
     {#if updating}
       <Jumper size="20" color="#10B981" />
@@ -49,7 +49,7 @@
   <RangeSlider float suffix="%" on:stop={setBrightness} disabled={updating} values={[light.brightness]} />
 
   {#if light.hue}
-    <RgbControls color={light.color} on:colorChange={changeColor} {updating}/>
+    <RgbControls color={light.color} on:colorChange={changeColor} {updating} />
   {/if}
 </div>
 
