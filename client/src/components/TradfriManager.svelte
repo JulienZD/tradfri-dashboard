@@ -18,7 +18,7 @@
 </script>
 
 <h1 class="text-center text-7xl mb-4">Tradfri</h1>
-<div class="flex justify-center">
+<div class="flex justify-center items-center flex-col md:flex-row md:items-start">
   {#each rooms as room}
     <TradfriRoom {room} />
   {/each}
