@@ -2,12 +2,14 @@ import dotenv from 'dotenv';
 import express from 'express';
 import roomsRouter from './routes/rooms';
 import lightsRouter from './routes/lights';
+import lightEventHandler from './events/lights';
 import path from 'path';
 
 dotenv.config();
 const app = express();
 const port = process.env.SERVER_PORT || 3001;
 
+app.use('/light-events', lightEventHandler);
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/public'));
   app.get('/', (req, res) => {

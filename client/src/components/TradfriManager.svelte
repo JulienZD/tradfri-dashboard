@@ -14,6 +14,23 @@
     } catch (e) {
       console.error(e);
     }
+    const sse = new EventSource('http://localhost:3001/light-events');
+
+    sse.onopen = (event) => {
+      console.log('opened');
+      status = 'open';
+    };
+
+    sse.onmessage = (event) => {
+      status = 'Message received!';
+      console.log(event.data);
+    };
+
+    return () => {
+      if (sse.readyState && sse.readyState === 1) {
+        sse.close();
+      }
+    };
   });
 </script>
 
