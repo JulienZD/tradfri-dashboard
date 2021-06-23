@@ -3,7 +3,7 @@
   import RangeSlider from 'svelte-range-slider-pips';
   import { Jumper } from 'svelte-loading-spinners';
   import Toggle from 'svelte-toggle';
-  import type { TradfriLightInfo } from '../types';
+  import type { TradfriLightInfo } from '../../shared';
   import { controlLight } from '../utils/controller';
   import RgbControls from './RGBControls.svelte';
 

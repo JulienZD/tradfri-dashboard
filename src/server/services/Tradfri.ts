@@ -1,6 +1,7 @@
 import { Accessory, AccessoryTypes, discoverGateway, Group, LightOperation, TradfriClient } from 'node-tradfri-client';
 import type { Room } from '../types/Room';
-import type { ControllableRoom, TradfriLightInfo, UpdateLightResult, UpdateRoomResult } from '../types';
+import type { ControllableRoom, TradfriLightInfo } from 'src/common';
+import type { UpdateLightResult, UpdateRoomResult } from '../types';
 import sleep from '../util/sleep';
 
 type Lightbulbs = { [key: number]: Accessory };

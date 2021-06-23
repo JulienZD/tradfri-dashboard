@@ -2,7 +2,7 @@
   import TradfriRoom from './TradfriRoom.svelte';
   import { onMount } from 'svelte';
   import axios from 'axios';
-  import type { ControllableRoom } from '../types';
+  import type { ControllableRoom } from '../../shared';
 
   let rooms: ControllableRoom[] = [];
 

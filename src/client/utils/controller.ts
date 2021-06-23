@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { UpdateLightOperation, TradfriLightInfo } from '../../server/types';
+import type { UpdateLightOperation, TradfriLightInfo } from '../../common';
 
 export async function controlLight(lightId: number, operation: UpdateLightOperation): Promise<TradfriLightInfo> {
   try {

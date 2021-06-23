@@ -1,7 +1,7 @@
 import express from 'express';
 import Tradfri from '../services/Tradfri';
 import { getControllableRooms, operateLightOrRoom } from '../services/tradfri-controller';
-import type { UpdateLightOperation } from '../../server/types';
+import type { UpdateLightOperation } from 'src/common';
 import type { LightOperation } from 'node-tradfri-client';
 
 const router = express.Router();

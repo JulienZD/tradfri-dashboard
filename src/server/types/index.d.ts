@@ -1,20 +1,4 @@
-export interface ControllableRoom {
-  name: string;
-  isOn: boolean;
-  brightness: number;
-  lights: TradfriLightInfo[];
-}
-
-export interface TradfriLightInfo {
-  id: number;
-  name: string;
-  isOn: boolean;
-  brightness: number;
-  color?: string;
-  hue?: number;
-  saturation?: number;
-  colorTemperature?: number;
-}
+import { ControllableRoom, TradfriLightInfo } from 'src/common';
 
 export interface UpdateLightResult {
   success: boolean;
@@ -26,10 +10,4 @@ export interface UpdateRoomResult {
   success: boolean;
   result?: ControllableRoom;
   error?: string;
-}
-
-export interface UpdateLightOperation {
-  on?: boolean;
-  brightness?: number;
-  color?: string;
 }
