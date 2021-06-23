@@ -1,6 +1,6 @@
-import Tradfri from './Tradfri';
-import { ControllableRoom, UpdateLightOperation, UpdateLightResult, UpdateRoomResult } from '../types';
-import { LightOperation } from 'node-tradfri-client';
+import type Tradfri from './Tradfri';
+import type { ControllableRoom, UpdateLightOperation, UpdateLightResult, UpdateRoomResult } from '../types';
+import type { LightOperation } from 'node-tradfri-client';
 
 function getControllableRooms(client: Tradfri): ControllableRoom[] {
   const groups = client.getGroups();

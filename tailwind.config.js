@@ -8,7 +8,7 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
   },
   purge: {
-    content: ['./src/**/*.svelte'],
+    content: ['./src/client/**/*.svelte'],
     enabled: production,
   },
   darkMode: false, // or 'media' or 'class'

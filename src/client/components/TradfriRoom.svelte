@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { ControllableRoom } from '../types';
+  import type { ControllableRoom } from '../../server/types';
   import TradfriLight from './TradfriLight.svelte';
   export let room: ControllableRoom;
 </script>

@@ -1,6 +1,6 @@
 import { Accessory, AccessoryTypes, discoverGateway, Group, LightOperation, TradfriClient } from 'node-tradfri-client';
-import { Room } from '../types/Room';
-import { ControllableRoom, TradfriLightInfo, UpdateLightResult, UpdateRoomResult } from '../types';
+import type { Room } from '../types/Room';
+import type { ControllableRoom, TradfriLightInfo, UpdateLightResult, UpdateRoomResult } from '../types';
 import sleep from '../util/sleep';
 
 type Lightbulbs = { [key: number]: Accessory };
@@ -28,12 +28,13 @@ class Tradfri extends TradfriClient {
       tradfri._groups = {};
 
       if (!process.env.IDENTITY || !process.env.PSK) {
-        console.log('Couldn\'t find an identity/psk pair. Generating a new one.');
+        console.log("Couldn't find an identity/psk pair. Generating a new one.");
         const { identity, psk } = await tradfri.authenticate(process.env.SECURITY_CODE);
-        console.log(`Created identity/psk pair.\nIdentity: ${identity}\nPSK: ${psk}\nIt's recommended that you store these somewhere safe.\n`);
+        console.log(
+          `Created identity/psk pair.\nIdentity: ${identity}\nPSK: ${psk}\nIt's recommended that you store these somewhere safe.\n`
+        );
         await tradfri.connect(identity, psk);
-      }
-      else {
+      } else {
         await tradfri.connect(process.env.IDENTITY, process.env.PSK);
       }
 
