@@ -1,12 +1,12 @@
-import type Tradfri from './Tradfri';
+import { tradfri } from './Tradfri';
 import type { ControllableRoom, UpdateLightOperation } from 'src/common';
 import type { UpdateLightResult, UpdateRoomResult } from '../types';
 import type { LightOperation } from 'node-tradfri-client';
 
-function getControllableRooms(client: Tradfri): ControllableRoom[] {
-  const groups = client.getGroups();
+function getControllableRooms(): ControllableRoom[] {
+  const groups = tradfri.getGroups();
   return Object.keys(groups)
-    .map((key) => client.getGroupInfo(key))
+    .map((key) => tradfri.getGroupInfo(key))
     .slice(1);
 }
 

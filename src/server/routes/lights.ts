@@ -1,5 +1,5 @@
 import express from 'express';
-import Tradfri from '../services/Tradfri';
+import { tradfri } from '../services/Tradfri';
 import { operateLightOrRoom } from '../services/tradfri-controller';
 import type { UpdateLightOperation } from 'src/common';
 import type { LightOperation } from 'node-tradfri-client';
@@ -7,7 +7,6 @@ import type { LightOperation } from 'node-tradfri-client';
 const router = express.Router();
 
 router.put('/:light', async (req, res) => {
-  const tradfri = await Tradfri.getInstance();
   const { light } = req.params;
   const operation: UpdateLightOperation = req.body;
 
@@ -21,7 +20,6 @@ router.put('/:light', async (req, res) => {
 });
 
 router.get('/:light', async (req) => {
-  const tradfri = await Tradfri.getInstance();
   const { light } = req.params;
   return tradfri.getLightInfo(+light);
 });
