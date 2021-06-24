@@ -143,8 +143,7 @@ class Tradfri extends EventEmitter {
     if (!light) return { success: false, error: 'This light does not exist' };
     const sent = await this.tradfriClient.operateLight(light, { ...operation, transitionTime: 0 });
     if (!sent) return { success: false, error: 'Failed to send internal request' };
-    // wait for internal light info to update
-    await sleep(1250);
+
     return { success: true, result: this.getLightInfo(lightId) };
   }
 
