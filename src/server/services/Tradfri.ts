@@ -1,12 +1,17 @@
 import { EventEmitter } from 'events';
 import { Accessory, AccessoryTypes, discoverGateway, Group, LightOperation, TradfriClient } from 'node-tradfri-client';
 import type { Room } from '../types/Room';
-import type { ControllableRoom, TradfriLightInfo } from 'src/common';
+import type { ControllableRoom, TradfriEvents, TradfriLightInfo } from 'src/common';
 import type { UpdateLightResult, UpdateRoomResult } from '../types';
 import sleep from '../util/sleep';
 
 type Lightbulbs = { [key: number]: Accessory };
 type Groups = { [key: string]: Group };
+
+declare interface Tradfri {
+  on<K extends keyof TradfriEvents>(event: K, listener: TradfriEvents[K]): this;
+  emit<K extends keyof TradfriEvents>(event: K, ...args: Parameters<TradfriEvents[K]>): boolean;
+}
 
 class Tradfri extends EventEmitter {
   private tradfriClient: TradfriClient;
@@ -29,17 +34,22 @@ class Tradfri extends EventEmitter {
     // Setup devices update functions
     const tradfri_deviceUpdated = (device: Accessory): void => {
       if (device.type === AccessoryTypes.lightbulb) {
-        console.log(`${device.instanceId} updated: ${device.lightList[0].dimmer}`);
+        console.log(
+          `${device.instanceId} updated: brightness=${device.lightList[0].dimmer} --- onOff=${device.lightList[0].onOff}`
+        );
         this.lightbulbs[device.instanceId] = device;
+        this.emit('lightUpdate', this.getLightInfo(device.instanceId));
       }
     };
     const tradfri_deviceRemoved = (instanceId: number): void => {
       console.log('Removing device ' + instanceId);
       delete this.lightbulbs[instanceId];
+      this.emit('deviceRemoved', instanceId);
     };
     const tradfri_groupUpdated = (group: Group): void => {
       console.log('group ' + group.name + ' updated');
       this._groups[group.name] = group;
+      this.emit('groupUpdate', group);
     };
 
     await this.tradfriClient

@@ -1,3 +1,5 @@
+import { Group } from 'node-tradfri-client';
+
 export interface ControllableRoom {
   name: string;
   isOn: boolean;
@@ -20,4 +22,10 @@ export interface UpdateLightOperation {
   on?: boolean;
   brightness?: number;
   color?: string;
+}
+
+export interface TradfriEvents {
+  lightUpdate: (light: TradfriLightInfo) => void;
+  groupUpdate: (group: Group) => void;
+  deviceRemoved: (instanceId: number) => void;
 }
