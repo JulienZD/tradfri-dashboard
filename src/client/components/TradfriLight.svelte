@@ -1,6 +1,5 @@
 <script lang="ts">
   import RangeSlider from 'svelte-range-slider-pips';
-  import { Jumper } from 'svelte-loading-spinners';
   import Toggle from 'svelte-toggle';
   import type { TradfriLightInfo } from '../../common';
   import { controlLight } from '../utils/controller';
@@ -32,10 +31,11 @@
   };
 </script>
 
-<div class="flex flex-col my-4 first:mt-0 last:mb-0">
-  <div class="flex justify-between mb-3">
-    <h2 class="font-medium text-lg">{light.name}</h2>
-    <Toggle hideLabel toggledColor="#10b981" toggled={light.isOn} on:click={toggle} />
+<div
+  class="flex flex-col my-4 first:mt-0 last:mb-0 border-t first:border-t-0 first:pt-0 pt-4 border-gray-400 dark:border-gray-600"
+>
+  <div class="flex justify-between mb-3 light-control">
+    <Toggle label={light.name} toggledColor="#3B82F6" toggled={light.isOn} on:click={toggle} />
   </div>
 
   <RangeSlider float suffix="%" on:stop={setBrightness} values={[light.brightness]} />
@@ -48,14 +48,23 @@
 <style>
   /* RangeSlider */
   :root {
-    --range-slider: #10b981; /* slider main background color */
-    --range-handle-inactive: #047857; /* inactive handle color */
-    --range-handle: #34d399; /* non-focussed handle color */
-    --range-handle-focus: #059669; /* focussed handle color */
+    --range-slider: #3b82f6; /* slider main background color */
+    --range-handle-inactive: #0b60ea; /* inactive handle color */
+    --range-handle: #1d49db; /* non-focussed handle color */
+    --range-handle-focus: #0643b3; /* focussed handle color */
   }
 
   :global(.rangeSlider) {
     margin: 4px 0 !important;
     margin-right: 8px !important;
+  }
+
+  /* Unfortunately these styles have to be applied globally as svelte-toggle does not support setting CSS / classes on the elements */
+  :global(.light-control label) {
+    @apply font-bold !text-base;
+  }
+
+  :global(button[role='switch']:focus-visible) {
+    @apply ring ring-offset-2 ring-blue-500 ring-offset-current;
   }
 </style>
