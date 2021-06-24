@@ -61,7 +61,7 @@
 
   /* Unfortunately these styles have to be applied globally as svelte-toggle does not support setting CSS / classes on the elements */
   :global(.light-control label) {
-    @apply font-bold !text-base;
+    @apply font-medium !text-base;
   }
 
   :global(button[role='switch']:focus-visible) {
