@@ -1,7 +1,11 @@
 <script lang="ts">
   import TradfriManager from './components/TradfriManager.svelte';
+  import ThemeSwitcher from './components/ThemeSwitcher.svelte';
 </script>
 
+<header>
+  <ThemeSwitcher />
+</header>
 <main>
   <TradfriManager />
 </main>
@@ -13,7 +17,7 @@
 
   @layer base {
     body {
-      @apply bg-gray-900 text-green-500;
+      @apply text-gray-900 dark:bg-gray-900 dark:text-gray-200 transition-colors;
     }
   }
 </style>

@@ -14,7 +14,7 @@
 <div class="mt-4 grid grid-cols-5 gap-y-3">
   {#each tradfriColors as color}
     <button
-      class="rounded-full h-12 w-12 focus:ring-2 focus:outline-none ring-offset-2 ring-offset-gray-800 ring-blue-500"
+      class="rounded-full h-12 w-12 focus:ring-2 focus:outline-none ring-offset-2 ring-offset-transparent dark:ring-offset-gray-800 ring-blue-300"
       class:selected={color === currentColor}
       style="background: #{color};"
       on:click={() => changeColor(color)}
@@ -24,6 +24,6 @@
 
 <style>
   .selected {
-    @apply ring ring-green-500;
+    @apply ring ring-blue-500 dark:ring-green-500;
   }
 </style>

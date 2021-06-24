@@ -11,13 +11,14 @@ module.exports = {
     content: ['./src/client/**/*.svelte'],
     enabled: production,
   },
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
       gray: colors.trueGray,
       green: colors.emerald,
+      blue: colors.blue,
     },
     extend: {},
   },
