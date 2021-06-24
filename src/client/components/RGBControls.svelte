@@ -1,8 +1,8 @@
 <script lang="ts">
-  import {createEventDispatcher} from "svelte";
+  import { createEventDispatcher } from 'svelte';
 
   export let color: string;
-  export let updating;
+
   const dispatch = createEventDispatcher();
 
   const tradfriColors = [
@@ -29,20 +29,19 @@
   ];
 
   function changeColor(a): void {
-    if (updating) return;
-    dispatch('colorChange', { color: a});
+    dispatch('colorChange', { color: a });
   }
 </script>
 
 <div class="mt-4 grid grid-cols-5 gap-y-3">
-{#each tradfriColors as aColor}
-  <button class="rounded-full h-12 w-12"
-          class:selected={aColor === color}
-          class:cursor-default={updating}
-          style="background: #{aColor};"
-          on:click={() => changeColor(aColor)}>
-  </button>
-{/each}
+  {#each tradfriColors as aColor}
+    <button
+      class="rounded-full h-12 w-12"
+      class:selected={aColor === color}
+      style="background: #{aColor};"
+      on:click={() => changeColor(aColor)}
+    />
+  {/each}
 </div>
 
 <style>
