@@ -20,6 +20,10 @@ module.exports = {
       green: colors.emerald,
       blue: colors.blue,
     },
+    container: {
+      center: true,
+      padding: '2rem',
+    },
     extend: {},
   },
   variants: {

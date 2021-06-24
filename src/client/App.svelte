@@ -3,7 +3,8 @@
   import ThemeSwitcher from './components/ThemeSwitcher.svelte';
 </script>
 
-<header>
+<header class="mb-4 container grid place-items-center gap-y-8">
+  <h1 class="text-4xl md:text-5xl">My Trådfri Home</h1>
   <ThemeSwitcher />
 </header>
 <main>
