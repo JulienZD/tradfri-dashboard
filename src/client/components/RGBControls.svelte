@@ -24,6 +24,6 @@
 
 <style>
   .selected {
-    @apply ring ring-blue-500 dark:ring-green-500;
+    @apply ring ring-blue-500;
   }
 </style>
