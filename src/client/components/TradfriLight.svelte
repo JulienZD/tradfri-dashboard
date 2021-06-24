@@ -40,8 +40,8 @@
 
   <RangeSlider float suffix="%" on:stop={setBrightness} values={[light.brightness]} />
 
-  {#if light.hue}
-    <RgbControls color={light.color} on:colorChange={changeColor} />
+  {#if light.hue !== undefined}
+    <RgbControls currentColor={light.color} on:colorChange={changeColor} />
   {/if}
 </div>
 
