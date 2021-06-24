@@ -1,3 +1,4 @@
+/* eslint-disable */
 import svelte from 'rollup-plugin-svelte';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
@@ -6,7 +7,6 @@ import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
-import dev from 'rollup-plugin-dev';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -22,38 +22,35 @@ function serve() {
       if (server) return;
       server = require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
         stdio: ['ignore', 'inherit', 'inherit'],
-        shell: true
+        shell: true,
       });
 
       process.on('SIGTERM', toExit);
       process.on('exit', toExit);
-    }
+    },
   };
 }
 
 export default {
-  input: 'src/main.ts',
+  input: 'src/client/main.ts',
   output: {
     sourcemap: true,
     format: 'iife',
     name: 'app',
-    file: 'public/build/bundle.js'
+    file: 'public/build/bundle.js',
   },
   plugins: [
     svelte({
       preprocess: sveltePreprocess({
         sourceMap: !production,
         postcss: {
-          plugins: [
-            require('tailwindcss'),
-            require('autoprefixer')
-          ]
-        }
+          plugins: [require('tailwindcss'), require('autoprefixer')],
+        },
       }),
       compilerOptions: {
         // enable run-time checks when not in production
-        dev: !production
-      }
+        dev: !production,
+      },
     }),
     // we'll extract any component CSS out into
     // a separate file - better for performance
@@ -66,25 +63,18 @@ export default {
     // https://github.com/rollup/plugins/tree/master/packages/commonjs
     resolve({
       browser: true,
-      dedupe: ['svelte']
+      dedupe: ['svelte'],
     }),
     commonjs(),
     typescript({
+      tsconfig: 'src/client/tsconfig.json',
       sourceMap: !production,
-      inlineSources: !production
+      inlineSources: !production,
     }),
 
-    !production && dev({
-      dirs: ['public'],
-      spa: 'public/index.html',
-      port: 5000,
-      proxy: {
-        '/*': 'localhost:3001/'
-      }
-    }),
     // // In dev mode, call `npm run start` once
     // // the bundle has been generated
-    // !production && serve(),
+    !production && serve(),
 
     // Watch the `public` directory and refresh the
     // browser on changes when not in production
@@ -95,6 +85,6 @@ export default {
     production && terser(),
   ],
   watch: {
-    clearScreen: false
-  }
+    clearScreen: false,
+  },
 };

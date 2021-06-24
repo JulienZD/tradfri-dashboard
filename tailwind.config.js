@@ -2,13 +2,14 @@
 const colors = require('tailwindcss/colors');
 const production = !process.env.ROLLUP_WATCH;
 module.exports = {
+  mode: 'jit',
   future: {
     purgeLayersByDefault: true,
     removeDeprecatedGapUtilities: true,
   },
   purge: {
-    content: ['./src/**/*.svelte'],
-    enabled: production
+    content: ['./src/client/**/*.svelte'],
+    enabled: production,
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -24,4 +25,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-}
+};

@@ -1,24 +1,20 @@
 <script lang="ts">
-  import { tick } from 'svelte';
   import RangeSlider from 'svelte-range-slider-pips';
   import { Jumper } from 'svelte-loading-spinners';
   import Toggle from 'svelte-toggle';
-  import type { TradfriLightInfo } from '../types';
+  import type { TradfriLightInfo } from '../../common';
   import { controlLight } from '../utils/controller';
   import RgbControls from './RGBControls.svelte';
+  import { lightsStore } from '../stores/tradfri';
+  import { tick } from 'svelte';
 
   export let light: TradfriLightInfo;
 
-  let updating: boolean;
+  $: light = $lightsStore.find((l) => l.id === light.id) ?? light;
 
   const operateLight = async (operation): Promise<void> => {
-    updating = true;
-    const result = await controlLight(light.id, operation);
-    if (result) {
-      light = { ...result };
-      await tick();
-    }
-    updating = false;
+    await controlLight(light.id, operation);
+    await tick();
   };
 
   const toggle = async (): Promise<void> => {
@@ -30,26 +26,22 @@
     await operateLight({ brightness: value });
   };
 
-  const changeColor = async({detail: { color } }): Promise<void> => {
+  const changeColor = async ({ detail: { color } }): Promise<void> => {
     if (color === light.color) return;
-    await operateLight({color: color})
-  }
+    await operateLight({ color: color });
+  };
 </script>
 
-<div class="flex flex-col my-1">
+<div class="flex flex-col my-4 first:mt-0 last:mb-0">
   <div class="flex justify-between mb-3">
-    {#if updating}
-      <Jumper size="20" color="#10B981" />
-    {:else}
-      <h2 class="font-medium text-lg">{light.name}</h2>
-    {/if}
-    <Toggle hideLabel toggledColor="#10b981" toggled={light.isOn} on:click={toggle} disabled={updating} />
+    <h2 class="font-medium text-lg">{light.name}</h2>
+    <Toggle hideLabel toggledColor="#10b981" toggled={light.isOn} on:click={toggle} />
   </div>
 
-  <RangeSlider float suffix="%" on:stop={setBrightness} disabled={updating} values={[light.brightness]} />
+  <RangeSlider float suffix="%" on:stop={setBrightness} values={[light.brightness]} />
 
-  {#if light.hue}
-    <RgbControls color={light.color} on:colorChange={changeColor} {updating}/>
+  {#if light.hue !== undefined}
+    <RgbControls currentColor={light.color} on:colorChange={changeColor} />
   {/if}
 </div>
 
