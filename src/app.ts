@@ -2,14 +2,14 @@ import dotenv from 'dotenv';
 import express from 'express';
 import roomsRouter from './server/routes/rooms';
 import lightsRouter from './server/routes/lights';
-import lightEventHandler from './server/events/lights';
+import tradfriEventHandler from './server/events/tradfri';
 import path from 'path';
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3001;
 
-app.use('/light-events', lightEventHandler);
+app.use('/tradfri-events', tradfriEventHandler);
 
 app.use(express.json());
 app.use('/rooms', roomsRouter);

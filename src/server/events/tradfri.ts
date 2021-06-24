@@ -1,4 +1,6 @@
 import express from 'express';
+import { TradfriEvents, TradfriLightInfo } from 'src/common';
+import { tradfri } from '../services/Tradfri';
 
 const router = express.Router();
 
@@ -26,15 +28,24 @@ router.get('/', async (req, res) => {
 
   clients.push(newClient);
 
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
-  console.log('Emit');
-  res.write(`data: Hello\n\n`);
+  console.log(`${clientId} Connection opened`);
 
   req.on('close', () => {
     console.log(`${clientId} Connection closed`);
     clients = clients.filter((client) => client.id !== clientId);
   });
+});
+
+function sendEvent(event: keyof TradfriEvents, data: string | TradfriLightInfo): void {
+  clients.forEach((c) => {
+    c.response.write(`event: ${event}\n`);
+    c.response.write(`data: ${JSON.stringify(data)}\n\n`);
+  });
+}
+
+tradfri.addListener('lightUpdate', async (light: TradfriLightInfo) => {
+  console.log(`Emitting light update to ${light?.id}`);
+  sendEvent('lightUpdate', light);
 });
 
 export default router;
