@@ -16,6 +16,14 @@ The front-end is made using Svelte and TailwindCSS.
 8. Navigate to `localhost:3001` to view the dashboard
 
 
+## Features
+- Real-time updates to device status
+- Light / dark theme
+
+## Tech Stack
+**Client:** Svelte, TailwindCSS
+
+**Server:** Node, Express
 
 ## Note
 This dashboard was created to suit my needs based on the setup I have at my home. It may not work properly for your lamps/needs.
