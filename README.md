@@ -7,11 +7,11 @@ The front-end is made using Svelte and TailwindCSS.
 ## Usage
 **Important:** Make sure the device you run this on is connected to the same network as your Trådfri gateway.
 1. Clone the repository
-2. run `npm install`
+2. Run `npm install`
 3. Create a `.env` file
 4. Place the security code on the back of your Trådfri gateway as `SECURITY_CODE` in the `.env` file.
 5. Generate an `identity`/`psk` pair by following [these instructions](https://github.com/AlCalzone/node-tradfri-client#authentication). Make sure to store these as `IDENTITY` and `PSK` in the `.env` file
-6. run `npm start`.
+6. Run `npm start`.
 7. Navigate to `localhost:3001` to view the dashboard
 
 
