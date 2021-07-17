@@ -47,7 +47,7 @@
     "svelte": "^3.0.0",
     "svelte-check": "^1.0.0",
     "svelte-preprocess": "^4.0.0",
-    "svelte-range-slider-pips": "^1.7.0",
+    "svelte-range-slider-pips": "^1.7.2",
     "svelte-toggle": "^3.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2",
     "ts-node-dev": "^1.1.6",
